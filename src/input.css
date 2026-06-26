@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0f4c5c;
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+  --color-border-color: #e2e8f0;
+
+  --font-heading: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-body: Outfit, system-ui, -apple-system, sans-serif;
+  --font-mono: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+}
+
+/* Custom Micro-animations */
+@utility nav-link-animation {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}

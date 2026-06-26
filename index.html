@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth scroll-pt-[90px]">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="cDivus - Portfolio of a Full-Stack Software Engineer & Creative Developer. Exploring projects and skills.">
+    <title>cDivus | Software Engineer Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./dist/output.css">
+</head>
+
+<body class="bg-white text-text-primary font-body antialiased overflow-x-hidden">
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-border-color">
+        <div class="max-w-[880px] mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="#home" class="font-heading font-extrabold text-2xl tracking-tight select-none">
+                cDivus<span class="text-primary text-3xl font-normal">.</span>
+            </a>
+            <nav class="flex gap-7 items-center max-[480px]:hidden">
+                <a href="#home" class="nav-link font-heading font-medium text-[0.95rem] text-text-secondary relative py-1 transition-all duration-300 hover:text-text-primary active">Home</a>
+                <a href="#skills" class="nav-link font-heading font-medium text-[0.95rem] text-text-secondary relative py-1 transition-all duration-300 hover:text-text-primary">Skills</a>
+                <a href="#projects" class="nav-link font-heading font-medium text-[0.95rem] text-text-secondary relative py-1 transition-all duration-300 hover:text-text-primary">Projects</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-[880px] mx-auto px-6 py-8">
+        <!-- Hero Section -->
+        <section id="home" class="py-4 md:py-8">
+            <div class="flex flex-col md:flex-row gap-12 items-start md:items-center mb-7">
+                <div class="relative flex-shrink-0 group">
+                    <div class="absolute -inset-1 rounded-full bg-gradient-to-br from-primary to-border-color -z-10 transition-transform duration-300 group-hover:scale-[1.02]"></div>
+                    <img src="assets/cdivus_avatar.jpg" alt="cDivus Avatar" class="w-[130px] md:w-[190px] h-[130px] md:h-[190px] rounded-full object-cover border-4 border-white shadow-lg transition-transform duration-300 group-hover:scale-[1.02]">
+                </div>
+                <div class="flex flex-col gap-3">
+                    <h1 class="font-heading text-4xl md:text-5xl font-extrabold tracking-tight leading-none">Reymel Sardenia</h1>
+                    <p class="text-lg font-medium text-text-secondary">Vibe Coder</p>
+                    <div class="flex gap-3 mt-2 flex-wrap">
+                        <a href="mailto:sardeniareymel@gmail.com" class="w-11 h-11 rounded-full bg-white border border-border-color shadow-sm flex items-center justify-center transition-all duration-300 hover:-translate-y-[3px] hover:shadow-md hover:bg-bg-secondary hover:border-text-muted group" aria-label="Email" title="Email">
+                            <img src="assets/icons/email.svg" alt="Email" class="w-5 h-5 transition-colors filter invert-[32%] sepia-[10%] saturate-[1210%] hue-rotate-[175deg] brightness-[97%] contrast-[87%]">
+                        </a>
+                        <a href="https://github.com/cDivus" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full bg-white border border-border-color shadow-sm flex items-center justify-center transition-all duration-300 hover:-translate-y-[3px] hover:shadow-md hover:bg-bg-secondary hover:border-text-muted group" aria-label="GitHub" title="GitHub">
+                            <img src="assets/icons/github.svg" alt="GitHub" class="w-5 h-5 transition-colors filter invert-[32%] sepia-[10%] saturate-[1210%] hue-rotate-[175deg] brightness-[97%] contrast-[87%]">
+                        </a>
+                        <a href="https://www.linkedin.com/in/reymel-sardenia-593462207" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full bg-white border border-border-color shadow-sm flex items-center justify-center transition-all duration-300 hover:-translate-y-[3px] hover:shadow-md hover:bg-bg-secondary hover:border-text-muted group" aria-label="LinkedIn" title="LinkedIn">
+                            <img src="assets/icons/linkedin.svg" alt="LinkedIn" class="w-5 h-5 transition-colors filter invert-[32%] sepia-[10%] saturate-[1210%] hue-rotate-[175deg] brightness-[97%] contrast-[87%]">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-[1.05rem] text-text-secondary flex flex-col gap-5 mt-6">
+                <p>Hello! I'm <strong class="text-text-primary font-semibold">Reymel</strong>, currently a 3rd year BS Computer Science student. I'm interested in AI and Automation works</p>
+                <p>Currently, I'm learning how to build tools on cloud environment, using CI/CD and etc.</p>
+            </div>
+        </section>
+
+        <!-- Divider Line -->
+        <hr class="border-t border-border-color my-9 max-w-[860px] mx-auto">
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-4">
+            <h2 class="font-heading text-2xl font-bold mb-8 text-text-primary">Skills</h2>
+            <div id="skills-container" class="flex flex-col gap-5"></div>
+        </section>
+
+        <!-- Divider Line -->
+        <hr class="border-t border-border-color my-9 max-w-[860px] mx-auto">
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-2">
+            <h2 class="font-heading text-2xl font-bold mb-8 text-text-primary">Projects</h2>
+            <div class="projects-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-border-color bg-bg-secondary mt-16 transition-all duration-300">
+        <div class="max-w-[880px] mx-auto px-6 py-8 flex justify-center items-center text-center text-text-secondary">
+            <p>&copy; 2026 cDivus. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JS script -->
+    <script src="script.js"></script>
+</body>
+
+</html>
