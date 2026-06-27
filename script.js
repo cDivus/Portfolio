@@ -19,18 +19,25 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // Scroll spy for navigation
+    // Scroll spy for navigation using IntersectionObserver
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
-    window.addEventListener('scroll', () => {
-        const scrollY = window.pageYOffset;
-        sections.forEach(sec => {
-            const top = sec.offsetTop - 120;
-            if (scrollY > top && scrollY <= top + sec.offsetHeight) {
-                navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${sec.id}`));
+    const observerOptions = {
+        root: null,
+        rootMargin: '-120px 0px -60% 0px',
+        threshold: 0
+    };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                });
             }
         });
-    });
+    }, observerOptions);
+    sections.forEach(sec => observer.observe(sec));
 
     // Mobile navigation menu toggle
     const menuToggleBtn = document.getElementById('mobile-menu-toggle');
