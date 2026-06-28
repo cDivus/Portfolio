@@ -80,6 +80,10 @@ function render(data) {
         document.getElementById('profile-email').href = `mailto:${data.profile.email}`;
         document.getElementById('profile-github').href = data.profile.github;
         document.getElementById('profile-linkedin').href = data.profile.linkedin;
+        if (data.profile.resume) {
+            const resumeEl = document.getElementById('profile-resume');
+            if (resumeEl) resumeEl.href = data.profile.resume;
+        }
         const bioContainer = document.getElementById('profile-bio');
         bioContainer.innerHTML = '';
         data.profile.bio.forEach(pText => {
