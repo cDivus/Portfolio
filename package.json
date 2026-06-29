@@ -1,16 +1,19 @@
 {
   "name": "portfolio",
+  "type": "module",
   "version": "1.0.0",
-  "description": "",
-  "main": "script.js",
+  "description": "Portfolio and Blog site built with Astro & Tailwind CSS v4",
   "scripts": {
-    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
-    "watch": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "astro": "^7.0.3"
+  },
   "devDependencies": {
-    "@tailwindcss/cli": "^4.3.1"
+    "@tailwindcss/cli": "^4.3.1",
+    "@tailwindcss/vite": "^4.3.1"
   }
 }
