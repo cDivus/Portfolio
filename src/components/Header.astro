@@ -1,0 +1,66 @@
+---
+const pathname = Astro.url.pathname;
+const isHome = pathname === '/' || pathname === '/index.html' || pathname === '';
+const isBlog = pathname.startsWith('/blog');
+---
+
+<header class="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-border-color">
+    <div class="max-w-[880px] mx-auto px-6 py-5 flex justify-between items-center relative">
+        <a href={isHome ? "#home" : "/"} class="font-heading font-extrabold text-2xl tracking-tight select-none">
+            cDivus<span class="text-primary text-3xl font-normal">.</span>
+        </a>
+        <nav class="flex gap-7 items-center max-[480px]:hidden">
+            <a href={isHome ? "#home" : "/#home"} class={`nav-link font-heading font-medium text-[0.95rem] text-text-secondary relative py-1 transition-all duration-300 hover:text-text-primary ${isHome ? 'active' : ''}`}>Home</a>
+            <a href={isHome ? "#skills" : "/#skills"} class="nav-link font-heading font-medium text-[0.95rem] text-text-secondary relative py-1 transition-all duration-300 hover:text-text-primary">Skills</a>
+            <a href={isHome ? "#projects" : "/#projects"} class="nav-link font-heading font-medium text-[0.95rem] text-text-secondary relative py-1 transition-all duration-300 hover:text-text-primary">Projects</a>
+            <a href="/blog" class={`nav-link font-heading font-medium text-[0.95rem] text-text-secondary relative py-1 transition-all duration-300 hover:text-text-primary ${isBlog ? 'active' : ''}`}>Blog</a>
+        </nav>
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-toggle" class="min-[481px]:hidden w-9 h-9 rounded-full border border-border-color bg-white flex items-center justify-center transition-all duration-300 hover:bg-bg-secondary hover:shadow-sm" aria-label="Toggle Mobile Menu" title="Toggle Mobile Menu">
+            <svg class="w-4 h-4 text-text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+    </div>
+    <!-- Mobile Navigation Menu -->
+    <div id="mobile-menu" class="hidden absolute top-[81px] left-0 w-full bg-white/95 backdrop-blur-md border-b border-border-color z-40 py-6 px-8 flex flex-col gap-4 shadow-md transition-all duration-300 min-[481px]:hidden">
+        <a href={isHome ? "#home" : "/#home"} class="mobile-nav-link font-heading font-medium text-[1.1rem] text-text-secondary transition-all hover:text-text-primary">Home</a>
+        <a href={isHome ? "#skills" : "/#skills"} class="mobile-nav-link font-heading font-medium text-[1.1rem] text-text-secondary transition-all hover:text-text-primary">Skills</a>
+        <a href={isHome ? "#projects" : "/#projects"} class="mobile-nav-link font-heading font-medium text-[1.1rem] text-text-secondary transition-all hover:text-text-primary">Projects</a>
+        <a href="/blog" class="mobile-nav-link font-heading font-medium text-[1.1rem] text-text-secondary transition-all hover:text-text-primary">Blog</a>
+    </div>
+</header>
+
+<script>
+    const menuToggleBtn = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    if (menuToggleBtn && mobileMenu) {
+        menuToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close menu when a link is clicked
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (e.target instanceof Node && !mobileMenu.contains(e.target) && e.target !== menuToggleBtn) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+
+        // Close menu when resizing past mobile threshold
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 480) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    }
+</script>

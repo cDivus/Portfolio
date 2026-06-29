@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Blog - cDivus" description="Thoughts, tutorials, and insights about software engineering, cloud architecture, and development.">
+    <main class="max-w-[880px] mx-auto px-6 py-12 md:py-16">
+        <!-- Blog Header -->
+        <section class="mb-12">
+            <h1 class="font-heading text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-text-primary">Blog</h1>
+            <p class="text-[1.05rem] text-text-secondary max-w-[600px] leading-relaxed">
+                Thoughts, tutorials, and insights about software engineering, cloud architecture, and development.
+            </p>
+        </section>
+
+        <!-- Empty State Container -->
+        <section class="flex flex-col items-center justify-center border border-dashed border-border-color rounded-md py-20 px-6 bg-bg-secondary/30 text-center">
+            <div class="w-16 h-16 rounded-full bg-bg-secondary flex items-center justify-center border border-border-color mb-5">
+                <!-- Simple Elegant Pencil/Notebook SVG -->
+                <svg class="w-7 h-7 text-text-muted" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"></path>
+                </svg>
+            </div>
+            <h2 class="font-heading text-xl font-bold text-text-primary mb-2">No Articles Yet</h2>
+            <p class="text-[0.95rem] text-text-secondary max-w-[360px] leading-relaxed">
+                Writing is currently in progress. Subscribe or check back soon for my first post!
+            </p>
+        </section>
+    </main>
+</Layout>
