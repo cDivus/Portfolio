@@ -1,4 +1,7 @@
 dist/
-node_modules/
 .astro/
-.DS_Store
+.sanity/
+
+node_modules/
+
+.env

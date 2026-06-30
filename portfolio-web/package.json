@@ -1,0 +1,21 @@
+{
+  "name": "portfolio-web",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Portfolio and Blog site built with Astro & Tailwind CSS v4",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@sanity/client": "^7.23.0",
+    "@sanity/image-url": "^2.1.1",
+    "astro": "^7.0.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.1",
+    "@tailwindcss/vite": "^4.3.1"
+  }
+}
