@@ -1,0 +1,101 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { client } from '../../sanity/client';
+
+export async function getStaticPaths() {
+  const posts = await client.fetch(`*[_type == "post"]{ "slug": slug.current }`);
+  return posts.map((post: any) => ({
+    params: { slug: post.slug || 'untitled' },
+  }));
+}
+
+const { slug } = Astro.params;
+const post = await client.fetch(
+  `*[_type == "post" && slug.current == $slug][0]`,
+  { slug }
+);
+
+if (!post) {
+  return Astro.redirect('/404');
+}
+
+function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+
+function renderPortableText(blocks: any[]) {
+  if (!blocks || !Array.isArray(blocks)) return '';
+  
+  return blocks.map(block => {
+    if (block._type !== 'block') return '';
+    
+    const childrenHtml = block.children.map((child: any) => {
+      let text = child.text;
+      if (child.marks) {
+        child.marks.forEach((mark: string) => {
+          const linkDef = block.markDefs?.find((def: any) => def._key === mark);
+          if (linkDef && linkDef._type === 'link') {
+            text = `<a href="${linkDef.href}" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">${text}</a>`;
+          } else if (mark === 'strong') {
+            text = `<strong>${text}</strong>`;
+          } else if (mark === 'em') {
+            text = `<em>${text}</em>`;
+          } else if (mark === 'code') {
+            text = `<code class="bg-bg-secondary px-1.5 py-0.5 rounded text-sm font-mono">${text}</code>`;
+          }
+        });
+      }
+      return text;
+    }).join('');
+
+    switch (block.style) {
+      case 'h1':
+        return `<h1 class="text-3xl font-bold font-heading mt-8 mb-4 text-text-primary">${childrenHtml}</h1>`;
+      case 'h2':
+        return `<h2 class="text-2xl font-bold font-heading mt-8 mb-4 text-text-primary">${childrenHtml}</h2>`;
+      case 'h3':
+        return `<h3 class="text-xl font-bold font-heading mt-6 mb-3 text-text-primary">${childrenHtml}</h3>`;
+      case 'blockquote':
+        return `<blockquote class="border-l-4 border-primary pl-4 italic my-6 text-text-secondary">${childrenHtml}</blockquote>`;
+      default:
+        return `<p class="leading-relaxed mb-6 font-body text-[1.05rem] text-text-secondary">${childrenHtml}</p>`;
+    }
+  }).join('');
+}
+---
+
+<Layout title={`${post.title} - cDivus`} description={post.description || ""}>
+    <main class="max-w-[760px] mx-auto px-6 py-12 md:py-16">
+        <!-- Back link -->
+        <a href="/blog" class="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary transition-colors duration-300 mb-8 font-mono">
+            &larr; Back to articles
+        </a>
+
+        <!-- Post Header -->
+        <header class="mb-10">
+            <div class="flex items-center gap-3 text-sm text-text-muted font-mono mb-3">
+                <time datetime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+            </div>
+            <h1 class="font-heading text-3xl md:text-4xl font-extrabold tracking-tight mb-4 text-text-primary">
+                {post.title}
+            </h1>
+            {post.description && (
+                <p class="text-lg text-text-secondary leading-relaxed font-body italic border-l-2 border-border-color pl-4 py-1">
+                    {post.description}
+                </p>
+            )}
+        </header>
+
+        <!-- Divider Line -->
+        <hr class="border-t border-border-color my-8">
+
+        <!-- Post Content -->
+        <article class="prose max-w-none text-text-primary font-body" set:html={renderPortableText(post.body)}>
+        </article>
+    </main>
+</Layout>

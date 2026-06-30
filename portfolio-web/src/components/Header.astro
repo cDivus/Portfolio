@@ -1,13 +1,18 @@
 ---
+import { client } from '../sanity/client';
+
 const pathname = Astro.url.pathname;
 const isHome = pathname === '/' || pathname === '/index.html' || pathname === '';
 const isBlog = pathname.startsWith('/blog');
+
+const profile = await client.fetch(`*[_type == "profile"][0]{ brandName }`);
+const brandName = profile?.brandName || '';
 ---
 
 <header class="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-border-color">
     <div class="max-w-[880px] mx-auto px-6 py-5 flex justify-between items-center relative">
         <a href={isHome ? "#home" : "/"} class="font-heading font-extrabold text-2xl tracking-tight select-none">
-            cDivus<span class="text-primary text-3xl font-normal">.</span>
+            {brandName}<span class="text-primary text-3xl font-normal">.</span>
         </a>
         <nav class="flex gap-7 items-center max-[480px]:hidden">
             <a href={isHome ? "#home" : "/#home"} class={`nav-link font-heading font-medium text-[0.95rem] text-text-secondary relative py-1 transition-all duration-300 hover:text-text-primary ${isHome ? 'active' : ''}`}>Home</a>

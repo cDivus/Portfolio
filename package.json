@@ -1,19 +1,14 @@
 {
-  "name": "portfolio",
-  "type": "module",
-  "version": "1.0.0",
-  "description": "Portfolio and Blog site built with Astro & Tailwind CSS v4",
+  "name": "portfolio-root",
+  "private": true,
+  "workspaces": [
+    "portfolio-web",
+    "portfolio-cms"
+  ],
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "astro": "^7.0.3"
-  },
-  "devDependencies": {
-    "@tailwindcss/cli": "^4.3.1",
-    "@tailwindcss/vite": "^4.3.1"
+    "web:dev": "npm run dev --workspace=portfolio-web",
+    "web:build": "npm run build --workspace=portfolio-web",
+    "cms:dev": "npm run dev --workspace=portfolio-cms",
+    "cms:build": "npm run build --workspace=portfolio-cms"
   }
 }
