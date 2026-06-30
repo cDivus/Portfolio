@@ -1,12 +1,12 @@
-# Portfolio & CMS Monorepo
+# Portfolio Blueprint
 
-This repository is organized as a decoupled monorepo, splitting the Astro web frontend from the Sanity CMS Studio.
+Reusable Portfolio Site with Sanity.io CMS. Sections include Home, Skills, Projects, and Blog.
 
 ## Structure
 
 ```
 Portfolio/
-├── portfolio-web/          # Astro Web Frontend (Pure Astro + Tailwind CSS)
+├── portfolio-web/          # Astro Web Frontend
 │   ├── src/                # Frontend source code
 │   │   ├── sanity/         # Client & image helpers for fetching data
 │   │   └── pages/          # Astro pages (index, blog, blog/[slug])
