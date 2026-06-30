@@ -8,6 +8,13 @@ if (!res.ok) {
   throw new Error(`Failed to fetch portfolio data: ${res.status} ${res.statusText}`);
 }
 const data = await res.json();
+
+function parseMarkdown(text: string) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/_(.*?)_/g, '<em>$1</em>');
+}
 ---
 
 <Layout title="Reymel Sardenia - cDivus" description="cDivus - Portfolio of a Full-Stack Software Engineer & Creative Developer. Exploring projects and skills.">
@@ -48,7 +55,7 @@ const data = await res.json();
 
             <div id="profile-bio" class="text-[1.05rem] text-text-secondary flex flex-col gap-5 mt-6">
                 {data.profile.bio.map(paragraph => (
-                    <p class="leading-relaxed font-body" set:html={paragraph}></p>
+                    <p class="leading-relaxed font-body" set:html={parseMarkdown(paragraph)}></p>
                 ))}
             </div>
             
