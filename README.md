@@ -44,8 +44,6 @@ To run the web frontend locally:
 npm run web:dev
 ```
 *   **Web URL:** `http://localhost:4321`
-*   The website automatically falls back to loading content from your GitHub Gist if the Sanity dataset is empty.
-
 ---
 
 ## Workspace Scripts Summary
