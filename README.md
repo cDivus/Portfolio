@@ -24,6 +24,26 @@ Portfolio/
 
 ---
 
+## Configuration
+
+Before running the project, update your Sanity credentials in these two CMS files:
+
+| File | Field | Description |
+|---|---|---|
+| `portfolio-cms/sanity.cli.ts` | `projectId` | Your Sanity project ID |
+| `portfolio-cms/sanity.cli.ts` | `studioHost` | Subdomain for hosted Studio (e.g. `yourname` → `yourname.sanity.studio`) |
+| `portfolio-cms/sanity.config.ts` | `projectId` | Same project ID as above |
+
+Also update `portfolio-web/.env`:
+```
+PUBLIC_SANITY_PROJECT_ID="your-project-id"
+PUBLIC_SANITY_DATASET="production"
+```
+
+> Your project ID can be found at [sanity.io/manage](https://sanity.io/manage).
+
+---
+
 ## Getting Started
 
 You can run development or build scripts for both directories directly from the root directory using the configured npm workspaces:
