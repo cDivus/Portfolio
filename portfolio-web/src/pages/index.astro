@@ -6,25 +6,7 @@ import { urlFor } from '../sanity/urlFor';
 const profile = await client.fetch(`*[_type == "profile"][0]`);
 const skills = await client.fetch(`*[_type == "skillCategory"] | order(order asc)`);
 const projects = await client.fetch(`*[_type == "project"] | order(order asc)`);
-
-// Fallback to Gist data if Sanity is empty
-let data = { profile, skills, projects };
-if (!profile) {
-  const GIST_URL = "https://gist.githubusercontent.com/cDivus/e2d057f5fefe33c77a108c0b8ddc5df1/raw/portfolio.json";
-  try {
-    const res = await fetch(GIST_URL);
-    if (res.ok) {
-      const gistData = await res.json();
-      data.profile = data.profile || gistData.profile;
-      data.skills = data.skills || gistData.skills;
-      data.projects = data.projects || gistData.projects;
-    }
-  } catch (err) {
-    console.error("Failed to fetch fallback gist data:", err);
-  }
-}
-
-const avatarUrl = data.profile?.avatar ? urlFor(data.profile.avatar).url() : '';
+const avatarUrl = profile?.avatar ? urlFor(profile.avatar).url() : '';
 
 function parseMarkdown(text: string) {
   return text
@@ -34,7 +16,7 @@ function parseMarkdown(text: string) {
 }
 ---
 
-<Layout title="Reymel Sardenia - cDivus" description="cDivus - Portfolio of a Full-Stack Software Engineer & Creative Developer. Exploring projects and skills.">
+<Layout title={profile.seoTitle} description={profile.seoDescription}>
     <main class="max-w-[880px] mx-auto px-6 py-8">
         <!-- Hero Section -->
         <section id="home" class="py-4 md:py-8">
@@ -45,24 +27,24 @@ function parseMarkdown(text: string) {
                 </div>
                 <div class="flex flex-col gap-3">
                     <h1 id="profile-name" class="font-heading text-4xl md:text-5xl font-extrabold tracking-tight leading-none text-text-primary">
-                        {data.profile.name}
+                        {profile.name}
                     </h1>
                     <p id="profile-role" class="text-lg font-medium text-text-secondary">
-                        {data.profile.role}
+                        {profile.role}
                     </p>
                     <div class="flex gap-3 mt-2 flex-wrap">
-                        {data.profile.email && (
-                            <a href={`mailto:${data.profile.email}`} class="w-11 h-11 rounded-full bg-white border border-border-color shadow-sm flex items-center justify-center transition-all duration-300 hover:-translate-y-[3px] hover:shadow-md hover:bg-bg-secondary hover:border-text-muted group" aria-label="Email" title="Email">
+                        {profile.email && (
+                            <a href={`mailto:${profile.email}`} class="w-11 h-11 rounded-full bg-white border border-border-color shadow-sm flex items-center justify-center transition-all duration-300 hover:-translate-y-[3px] hover:shadow-md hover:bg-bg-secondary hover:border-text-muted group" aria-label="Email" title="Email">
                                 <img src="/assets/icons/email.svg" alt="Email" class="w-5 h-5 transition-colors filter invert-[32%] sepia-[10%] saturate-[1210%] hue-rotate-[175deg] brightness-[97%] contrast-[87%]">
                             </a>
                         )}
-                        {data.profile.github && (
-                            <a href={data.profile.github} target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full bg-white border border-border-color shadow-sm flex items-center justify-center transition-all duration-300 hover:-translate-y-[3px] hover:shadow-md hover:bg-bg-secondary hover:border-text-muted group" aria-label="GitHub" title="GitHub">
+                        {profile.github && (
+                            <a href={profile.github} target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full bg-white border border-border-color shadow-sm flex items-center justify-center transition-all duration-300 hover:-translate-y-[3px] hover:shadow-md hover:bg-bg-secondary hover:border-text-muted group" aria-label="GitHub" title="GitHub">
                                 <img src="/assets/icons/github.svg" alt="GitHub" class="w-5 h-5 transition-colors filter invert-[32%] sepia-[10%] saturate-[1210%] hue-rotate-[175deg] brightness-[97%] contrast-[87%]">
                             </a>
                         )}
-                        {data.profile.linkedin && (
-                            <a href={data.profile.linkedin} target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full bg-white border border-border-color shadow-sm flex items-center justify-center transition-all duration-300 hover:-translate-y-[3px] hover:shadow-md hover:bg-bg-secondary hover:border-text-muted group" aria-label="LinkedIn" title="LinkedIn">
+                        {profile.linkedin && (
+                            <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full bg-white border border-border-color shadow-sm flex items-center justify-center transition-all duration-300 hover:-translate-y-[3px] hover:shadow-md hover:bg-bg-secondary hover:border-text-muted group" aria-label="LinkedIn" title="LinkedIn">
                                 <img src="/assets/icons/linkedin.svg" alt="LinkedIn" class="w-5 h-5 transition-colors filter invert-[32%] sepia-[10%] saturate-[1210%] hue-rotate-[175deg] brightness-[97%] contrast-[87%]">
                             </a>
                         )}
@@ -71,13 +53,13 @@ function parseMarkdown(text: string) {
             </div>
 
             <div id="profile-bio" class="text-[1.05rem] text-text-secondary flex flex-col gap-5 mt-6">
-                {data.profile.bio.map(paragraph => (
+                {profile.bio.map(paragraph => (
                     <p class="leading-relaxed font-body" set:html={parseMarkdown(paragraph)}></p>
                 ))}
             </div>
             
-            {data.profile.resume && (
-                <a id="profile-resume" href={data.profile.resume} target="_blank" rel="noopener noreferrer" class="inline-block mt-6 text-[1.05rem] text-text-secondary hover:text-primary transition-colors duration-300 font-medium underline underline-offset-4">
+            {profile.resume && (
+                <a id="profile-resume" href={profile.resume} target="_blank" rel="noopener noreferrer" class="inline-block mt-6 text-[1.05rem] text-text-secondary hover:text-primary transition-colors duration-300 font-medium underline underline-offset-4">
                     View Resume
                 </a>
             )}
@@ -90,7 +72,7 @@ function parseMarkdown(text: string) {
         <section id="skills" class="py-4">
             <h2 class="font-heading text-2xl font-bold mb-8 text-text-primary">Skills</h2>
             <div id="skills-container" class="flex flex-col gap-5">
-                {data.skills.map(skillGroup => (
+                {skills.map(skillGroup => (
                     <div class="skills-category-row flex items-start gap-8 mb-5 last:mb-0 max-[640px]:flex-col max-[640px]:gap-1.5 max-[640px]:mb-6">
                         <div class="skills-category-label font-mono text-[0.8rem] font-semibold text-text-muted tracking-[1.5px] uppercase w-[150px] shrink-0 pt-[0.2rem] max-[640px]:w-auto max-[640px]:pt-0">
                             {skillGroup.category}
@@ -110,7 +92,7 @@ function parseMarkdown(text: string) {
         <section id="projects" class="py-2">
             <h2 class="font-heading text-2xl font-bold mb-8 text-text-primary">Projects</h2>
             <div class="projects-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                {data.projects.map(project => (
+                {projects.map(project => (
                     <article class="project-card bg-white border border-border-color rounded-md overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-primary flex flex-col">
                         <div class="project-details p-7 flex flex-col flex-grow">
                             <div class="project-header flex justify-between items-start gap-4 mb-3">

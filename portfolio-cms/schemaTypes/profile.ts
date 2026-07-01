@@ -63,5 +63,21 @@ export const profileType = defineType({
       description: 'The short brand logo name (e.g., "cDivus")',
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: 'seoTitle',
+      title: 'SEO Title',
+      type: 'string',
+      description:
+        'The page title shown in search engine results and browser tabs.',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'seoDescription',
+      title: 'SEO Description',
+      type: 'string',
+      description:
+        'A brief summary of the page used by search engines.',
+      validation: (Rule) => Rule.required(),
+    })
   ],
 });
