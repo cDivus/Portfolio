@@ -2,18 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import { client } from '../sanity/client';
 import { urlFor } from '../sanity/urlFor';
+import { renderPortableText } from '../utils/renderPortableText';
 
 const profile = await client.fetch(`*[_type == "profile"][0]`);
 const skills = await client.fetch(`*[_type == "skillCategory"] | order(order asc)`);
 const projects = await client.fetch(`*[_type == "project"] | order(order asc)`);
 const avatarUrl = profile?.avatar ? urlFor(profile.avatar).url() : '';
 
-function parseMarkdown(text: string) {
-  return text
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/_(.*?)_/g, '<em>$1</em>');
-}
+
 ---
 
 <Layout title={profile.seoTitle} description={profile.seoDescription}>
@@ -52,10 +48,7 @@ function parseMarkdown(text: string) {
                 </div>
             </div>
 
-            <div id="profile-bio" class="text-[1.05rem] text-text-secondary flex flex-col gap-5 mt-6">
-                {profile.bio.map(paragraph => (
-                    <p class="leading-relaxed font-body" set:html={parseMarkdown(paragraph)}></p>
-                ))}
+            <div id="profile-bio" class="text-[1.05rem] text-text-secondary flex flex-col gap-5 mt-6" set:html={renderPortableText(profile.bio)}>
             </div>
             
             {profile.resume && (

@@ -34,9 +34,9 @@ export const profileType = defineType({
     }),
     defineField({
       name: 'bio',
-      title: 'Bio (Paragraphs)',
+      title: 'Bio',
       type: 'array',
-      of: [{ type: 'string' }],
+      of: [{ type: 'block' }],
     }),
     defineField({
       name: 'resume',
