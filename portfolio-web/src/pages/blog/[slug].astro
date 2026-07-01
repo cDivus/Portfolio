@@ -10,10 +10,11 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const post = await client.fetch(
-  `*[_type == "post" && slug.current == $slug][0]`,
-  { slug }
-);
+const [post, profile] = await Promise.all([
+  client.fetch(`*[_type == "post" && slug.current == $slug][0]`, { slug }),
+  client.fetch(`*[_type == "profile"][0]{ brandName }`),
+]);
+const brandName = profile?.brandName || '';
 
 if (!post) {
   return Astro.redirect('/404');
@@ -69,7 +70,7 @@ function renderPortableText(blocks: any[]) {
 }
 ---
 
-<Layout title={`${post.title} - cDivus`} description={post.description || ""}>
+<Layout title={brandName ? `${post.title} - ${brandName}` : post.title} description={post.description || ""}>
     <main class="max-w-[760px] mx-auto px-6 py-12 md:py-16">
         <!-- Back link -->
         <a href="/blog" class="inline-flex items-center gap-2 text-sm text-text-muted hover:text-primary transition-colors duration-300 mb-8 font-mono">

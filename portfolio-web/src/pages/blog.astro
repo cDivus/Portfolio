@@ -3,6 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import { client } from '../sanity/client';
 
 const posts = await client.fetch(`*[_type == "post"] | order(publishedAt desc)`) || [];
+const profile = await client.fetch(`*[_type == "profile"][0]{ brandName, blogSubtitle }`);
+const brandName = profile?.brandName || 'Blog';
+const blogSubtitle = profile?.blogSubtitle || '';
 
 function formatDate(dateString: string) {
   const date = new Date(dateString);
@@ -14,14 +17,16 @@ function formatDate(dateString: string) {
 }
 ---
 
-<Layout title="Blog - cDivus" description="Thoughts, tutorials, and insights about software engineering, cloud architecture, and development.">
+<Layout title={`Blog - ${brandName}`} description={blogSubtitle}>
     <main class="max-w-[880px] mx-auto px-6 py-12 md:py-16">
         <!-- Blog Header -->
         <section class="mb-12">
             <h1 class="font-heading text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-text-primary">Blog</h1>
-            <p class="text-[1.05rem] text-text-secondary max-w-[600px] leading-relaxed">
-                Thoughts, tutorials, and insights about software engineering, cloud architecture, and development.
-            </p>
+            {blogSubtitle && (
+                <p class="text-[1.05rem] text-text-secondary max-w-[600px] leading-relaxed">
+                    {blogSubtitle}
+                </p>
+            )}
         </section>
 
         <!-- Blog Posts List -->

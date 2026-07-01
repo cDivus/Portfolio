@@ -78,6 +78,12 @@ export const profileType = defineType({
       description:
         'A brief summary of the page used by search engines.',
       validation: (Rule) => Rule.required(),
-    })
+    }),
+    defineField({
+      name: 'blogSubtitle',
+      title: 'Blog Subtitle',
+      type: 'string',
+      description: 'The subtitle shown below the "Blog" heading on the blog listing page.',
+    }),
   ],
 });
