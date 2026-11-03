@@ -1,15 +1,3 @@
-# Portfolio & Blog
-
-Fast, minimal portfolio and blog site built with [Astro](https://astro.build) and [Tailwind CSS v4](https://tailwindcss.com).
-
-## Features
-
-- **Blazing Fast**: Static Site Generation (SSG) with 0 kB client-side JavaScript by default.
-- **Multi-Page Architecture**: Distinct routes for About (`/`), Projects (`/projects`), and Blog (`/blog`).
-- **Local Content**: Content and projects stored in local JSON files and Markdown collections.
-- **Asset Optimization**: Built-in WebP image optimization and link prefetching.
-- **Zero Third-Party Runtime Dependencies**: No external CMS, no API rate limits, works 100% offline.
-
 ## Project Structure
 
 ```text
@@ -31,36 +19,3 @@ Fast, minimal portfolio and blog site built with [Astro](https://astro.build) an
 └── tsconfig.json         # TypeScript configuration
 ```
 
-## Getting Started
-
-### Development
-Start the local development server:
-
-```bash
-npm run dev
-```
-
-Open `http://localhost:4321` in your browser.
-
-### Build
-Generate static HTML/CSS ready for production:
-
-```bash
-npm run build
-```
-
-Preview the production build locally:
-
-```bash
-npm run preview
-```
-
-## Managing Content
-
-- **Profile & Bio**: Edit [`src/data/profile.json`](src/data/profile.json)
-- **Projects**: Edit [`src/data/projects.json`](src/data/projects.json)
-- **Blog Articles**: Add or edit `.md` files in [`src/content/blog/`](src/content/blog/)
-
-## Deployment
-
-Deploy directly to Vercel, Netlify, Cloudflare Pages, or GitHub Pages. The build output is located in `dist/`.

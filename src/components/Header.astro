@@ -12,7 +12,7 @@ const isBlog = pathname.startsWith('/blog');
 <header class="w-full max-w-[840px] mx-auto px-6 pt-10 sm:pt-14 pb-0">
     <!-- Profile Card (Avatar + Name + Role + Socials) -->
     <div class="flex items-center gap-6 sm:gap-7 mb-8">
-        <div class="relative flex-shrink-0">
+        <div class="relative flex-shrink-0" transition:persist="avatar">
             <Image 
                 src={avatarImage} 
                 alt={profile.name} 
