@@ -1,0 +1,11 @@
+---
+import profile from '../data/profile.json';
+
+const brandName = profile.brandName || '';
+---
+<footer class="w-full border-t border-border-color bg-white mt-16">
+    <div class="w-full max-w-[840px] mx-auto px-6 py-8 flex justify-between items-center text-xs text-neutral-500 font-mono">
+        <p>&copy; {new Date().getFullYear()} {brandName}</p>
+        <a href="#" class="hover:text-black transition-colors">&uarr; Back to top</a>
+    </div>
+</footer>

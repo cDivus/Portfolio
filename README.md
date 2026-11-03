@@ -1,86 +1,66 @@
-# Portfolio Blueprint
+# Portfolio & Blog
 
-Reusable Portfolio Site with Sanity.io CMS. Sections include Home, Skills, Projects, and Blog.
+Fast, minimal portfolio and blog site built with [Astro](https://astro.build) and [Tailwind CSS v4](https://tailwindcss.com).
 
-## Structure
+## Features
 
+- **Blazing Fast**: Static Site Generation (SSG) with 0 kB client-side JavaScript by default.
+- **Multi-Page Architecture**: Distinct routes for About (`/`), Projects (`/projects`), and Blog (`/blog`).
+- **Local Content**: Content and projects stored in local JSON files and Markdown collections.
+- **Asset Optimization**: Built-in WebP image optimization and link prefetching.
+- **Zero Third-Party Runtime Dependencies**: No external CMS, no API rate limits, works 100% offline.
+
+## Project Structure
+
+```text
+├── public/               # Static assets (favicons, icons)
+├── src/
+│   ├── assets/           # Local images processed & optimized by Astro
+│   ├── components/       # UI components (Header, Footer)
+│   ├── content/          # Markdown blog articles
+│   │   └── blog/
+│   ├── data/             # Profile and projects data
+│   │   ├── profile.json
+│   │   └── projects.json
+│   ├── layouts/          # Base layout template
+│   ├── pages/            # Page routes (/, /projects, /blog, /blog/[slug])
+│   ├── content.config.ts # Content collections schema
+│   └── input.css         # Tailwind CSS entry & custom styles
+├── astro.config.mjs      # Astro configuration
+├── package.json          # Project dependencies & scripts
+└── tsconfig.json         # TypeScript configuration
 ```
-Portfolio/
-├── portfolio-web/          # Astro Web Frontend
-│   ├── src/                # Frontend source code
-│   │   ├── sanity/         # Client & image helpers for fetching data
-│   │   └── pages/          # Astro pages (index, blog, blog/[slug])
-│   ├── astro.config.mjs    # Astro configuration
-│   ├── package.json        # Frontend dependencies (only @sanity/client for queries)
-│   └── tsconfig.json       # TypeScript configuration
-│
-└── portfolio-cms/          # Standalone Sanity CMS Studio
-    ├── schemaTypes/        # Content models (Profile, Projects, Skills, Posts)
-    ├── sanity.config.ts    # Studio configurations
-    ├── sanity.cli.ts       # CLI credentials setup
-    ├── package.json        # Studio dependencies (sanity, react, styled-components)
-    └── tsconfig.json       # TypeScript configuration
-```
-
----
-
-## Configuration
-
-Before running the project, update your Sanity credentials in these two CMS files:
-
-| File | Field | Description |
-|---|---|---|
-| `portfolio-cms/sanity.cli.ts` | `projectId` | Your Sanity project ID |
-| `portfolio-cms/sanity.cli.ts` | `studioHost` | Subdomain for hosted Studio (e.g. `yourname` → `yourname.sanity.studio`) |
-| `portfolio-cms/sanity.config.ts` | `projectId` | Same project ID as above |
-
-Also update `portfolio-web/.env`:
-```
-PUBLIC_SANITY_PROJECT_ID="your-project-id"
-PUBLIC_SANITY_DATASET="production"
-```
-
-> Your project ID can be found at [sanity.io/manage](https://sanity.io/manage).
-
----
 
 ## Getting Started
 
-You can run development or build scripts for both directories directly from the root directory using the configured npm workspaces:
-
-### 1. Run the CMS Studio (Sanity)
-To run the CMS Studio locally without changing directories:
+### Development
+Start the local development server:
 
 ```bash
-npm run cms:dev
+npm run dev
 ```
-*   **Studio URL:** `http://localhost:3333`
-*   Open the URL to sign in and input your Profile details, Projects, Skills, and Blog Posts.
 
-### 2. Run the Web Frontend (Astro)
-To run the web frontend locally:
+Open `http://localhost:4321` in your browser.
+
+### Build
+Generate static HTML/CSS ready for production:
 
 ```bash
-npm run web:dev
+npm run build
 ```
-*   **Web URL:** `http://localhost:4321`
----
 
-## Workspace Scripts Summary
+Preview the production build locally:
 
-*   `npm run web:dev` - Run frontend dev server
-*   `npm run web:build` - Build frontend static files
-*   `npm run cms:dev` - Run Sanity Studio locally
-*   `npm run cms:build` - Build Sanity Studio locally
+```bash
+npm run preview
+```
 
----
+## Managing Content
+
+- **Profile & Bio**: Edit [`src/data/profile.json`](src/data/profile.json)
+- **Projects**: Edit [`src/data/projects.json`](src/data/projects.json)
+- **Blog Articles**: Add or edit `.md` files in [`src/content/blog/`](src/content/blog/)
 
 ## Deployment
 
-1.  **Frontend (`portfolio-web`):** Deploy to Vercel, Netlify, or any static provider.
-2.  **CMS Studio (`portfolio-cms`):** Deploy the hosted Studio to Sanity Cloud:
-    ```bash
-    cd portfolio-cms
-    npx sanity deploy
-    ```
-
+Deploy directly to Vercel, Netlify, Cloudflare Pages, or GitHub Pages. The build output is located in `dist/`.

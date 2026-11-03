@@ -1,0 +1,50 @@
+[
+  {
+    "title": "SkillCheck",
+    "comment": "Backend Developer",
+    "description": "An online examination system designed for convenient student assessment and exam creation.",
+    "tags": ["Laravel", "TailwindCSS", "Alpine.js", "MySQL/MariaDB"],
+    "codeUrl": "https://github.com/CupNoodlez/skillcheck",
+    "order": 1
+  },
+  {
+    "title": "Polymart",
+    "comment": "Backend Developer",
+    "description": "Peer-to-peer marketplace built for PUP students.",
+    "tags": ["React", "TailwindCSS", "FastAPI", "AWS (DynamoDB, S3, EC2, ECR)", "Supabase"],
+    "codeUrl": "https://github.com/CupNoodlez/Polymart",
+    "order": 2
+  },
+  {
+    "title": "BicolaNER",
+    "comment": "Research Project",
+    "description": "Named Entity Recognition for Central Bikol using mDeBERTaV3-CRF.",
+    "tags": ["Flask", "PyTorch", "Hugging face", "Prodigy", "Spacy"],
+    "codeUrl": "https://github.com/CupNoodlez/BicolaNER",
+    "order": 3
+  },
+  {
+    "title": "Web-Blocker",
+    "comment": "Personal Project",
+    "description": "A browser extension that blocks distracting websites and limits usage time.",
+    "tags": ["Vanilla JS"],
+    "codeUrl": "https://github.com/cDivus/Web-Blocker",
+    "order": 4
+  },
+  {
+    "title": "MoolaTrack",
+    "comment": "Personal Project",
+    "description": "A CLI-based expense tracker that integrates Cowsay to display fun commentary on your spending habits.",
+    "tags": ["Python", "Cowsay", "PyTest"],
+    "codeUrl": "https://github.com/cDivus/MoolaTrack",
+    "order": 5
+  },
+  {
+    "title": "EcoDigest",
+    "comment": "Research Project",
+    "description": "A multi-document text summarization platform that condenses environmental comments in social media into coherent, easy-to-read summaries using a fine-tuned FLAN-T5 large model.",
+    "tags": ["Streamlit", "Pytorch", "Hugging face"],
+    "codeUrl": "https://github.com/CupNoodlez/Summarized-Sentiment-Analyzer",
+    "order": 6
+  }
+]

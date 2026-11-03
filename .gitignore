@@ -1,7 +1,13 @@
+# Build output
 dist/
 .astro/
-.sanity/
 
+# Dependencies
 node_modules/
 
+# Environment variables
 .env
+.env.production
+
+# Mac OS
+.DS_Store

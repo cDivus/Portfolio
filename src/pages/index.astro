@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import profile from '../data/profile.json';
+import news from '../data/news.json';
+---
+
+<Layout title={profile.seoTitle} description={profile.seoDescription}>
+    <main class="w-full max-w-[840px] mx-auto px-6 py-8">
+        <!-- Bio / Summary -->
+        <article class="text-[1.05rem] text-neutral-800 leading-relaxed flex flex-col gap-5" set:html={profile.bio}>
+        </article>
+
+        <!-- News Section -->
+        {news.length > 0 && (
+            <section class="mt-10 pt-8 border-t border-border-color">
+                <h2 class="font-heading text-lg font-bold text-black mb-4">News</h2>
+                <ul class="flex flex-col gap-3 text-[0.98rem] text-neutral-800">
+                    {news.map(item => (
+                        <li class="flex items-start gap-2.5">
+                            <span class="text-neutral-400 select-none mt-1 text-xs">&bull;</span>
+                            <div class="leading-relaxed">
+                                <strong class="font-semibold text-black">{item.date}:</strong> {item.text}
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+        )}
+    </main>
+</Layout>
