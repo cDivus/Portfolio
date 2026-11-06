@@ -162,3 +162,10 @@
   border-top: 1px solid var(--color-border-color);
   margin: 2em 0;
 }
+
+/* Disable view transition animations for instant section switching */
+::view-transition-group(*),
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation: none !important;
+}
